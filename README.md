@@ -4,7 +4,7 @@
 
 ## 환경설정
 
-1. 노드버전관리 툴
+### 1. 노드버전관리 툴
 
 - n
 
@@ -19,7 +19,7 @@
   node.js가 먼저 설치되어 있으면 안된다
   ```
 
-2. Formatting과 Linting
+### 2. Formatting과 Linting
 
 - 2-1. Formatting  
   prettier 설치
@@ -65,6 +65,29 @@
   }
   ```
 
-3. Typesciprt
+### 3. Typesciprt: type checking
+
+- 3-1. Typescript
+  ```
+  npm install -D typescript
+  ```
+  ```js
+  //@ts-check
+  const a = 'hello'
+  const b = Math.log(a) // Math에 문자열을 할당할 수 없다 .ts(2345)
+  console.log(b)
+  /*
+  ts-check를 통해서 typescript문법사용 없이 체크가능
+  */
+  ```
+  jsconfig.json 생성 및 설정
+  ```js
+  {
+    "compilerOptions": {
+      "strict": true // strict모드 만드시 켜주자
+    },
+    "include": ["src/**/*"] // src디렉터리 밑에서만 적용
+  }
+  ```
 
 ---
