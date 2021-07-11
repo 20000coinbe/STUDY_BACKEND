@@ -3,6 +3,7 @@
 // Prototype
 
 function Person(name) {
+  // 함수를 이용한 클래스 표현
   this.name = name
 }
 
@@ -11,7 +12,7 @@ Person.prototype.greet = function greet() {
 }
 
 function Student(name) {
-  // 함수를 이용한 클래스 표현
+  // Person에서 정의한 name변수를 가져와서 사용하기
   this.__prototype__.constructor(name)
 }
 
@@ -23,3 +24,4 @@ Object.setPrototypeOf(Student.prototype, Person.prototype)
 
 const me = new Student('neo')
 console.log(me.greet())
+console.log(me.study())
