@@ -1,13 +1,13 @@
 // @ts-check
 /* eslint-disable no-restricted-syntax */
 
-/** 
+/**
  * @typeof Person
- * 
+ *
  * @property {number} age
  * @property {string} city
  * @property {string | string[]} [pet]
-*/
+ */
 
 /** @type {Person[]} */
 const people = [
@@ -47,7 +47,7 @@ function normalFunc() {
 
   for (const person of people) {
     if (person.age < 30) {
-      if(!cities.find((city) => person.city === city)) {
+      if (!cities.find((city) => person.city === city)) {
         cities.push(person.city)
       }
     }
@@ -58,14 +58,15 @@ function normalFunc() {
 
 function modernFunc() {
   // 장점 : 위쪽 로직에 구애받지 않고 진행가능
-  const allCities = people.filter((person) => person.age < 30).map((person) => person.city)
+  const allCities = people
+    .filter((person) => person.age < 30)
+    .map((person) => person.city)
   const set = new Set(allCities)
   return Array.from(set)
 }
 
 console.log(normalFunc())
 console.log(modernFunc())
-
 
 // * B. 각 도시별로 개와 고양이를 키우는 사람의 수
 
@@ -83,11 +84,14 @@ function solveB() {
 
       if (typeof petOrPets === 'string') {
         const pet = petOrPets
-        
-        const origNumPetsOfCity = petsOfCity[pet] || 0
-        petsOfCity[pet] = ? petsOfCity[pet] + 1 : 1
-      } else {
 
+        const origNumPetsOfCity = petsOfCity[pet] || 0
+        petsOfCity[pet] = origNumPetsOfCity + 1
+      } else {
+        for (const pet of petOrPets) {
+          const origNumPetsOfCity = petsOfCity[pet] || 0
+          petsOfCity[pet] = origNumPetsOfCity + 1
+        }
       }
 
       result[city] = petsOfCity
@@ -95,4 +99,10 @@ function solveB() {
   }
 
   return result
+}
+
+console.log(solveB())
+
+function solveBModern() {
+  return
 }
