@@ -1,6 +1,6 @@
 // @ts-check
 
-require('core-js')
+// require('core-js')
 
 const complicatedArray = [1, [2, 3]]
 const flattendArray = complicatedArray.flat() // flat하게 만들어준다
