@@ -10,7 +10,7 @@ fs.readFile('../.gitignore', 'utf-8', (error, value) => {
   // package-lock.json
 })
 
-// promise로 만들어보기
+// promise를 이용하여 만들어보기
 /** @param {string} fileName */
 function readFileInPromise(fileName) {
   return new Promise((resolve, reject) => {

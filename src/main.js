@@ -1,27 +1,32 @@
-/* eslint-disable */
+// @ts-check
 
-// Prototype
+// 프레임워크 없이 웹서버 만들어보기
 
-function Person(name) {
-  // 함수를 이용한 클래스 표현
-  this.name = name
-}
+/**
+ * 블로그 포스팅 서비스
+ *  - 로컬 파일을 DB로 활용(JSON)
+ *  - 인증 로직 제외
+ *  - RESTful API 사용
+ */
 
-Person.prototype.greet = function greet() {
-  return 'Hi, ${this.name}'
-}
+const http = require('http')
 
-function Student(name) {
-  // Person에서 정의한 name변수를 가져와서 사용하기
-  this.__prototype__.constructor(name)
-}
+/**
+ * POST
+ *
+ * GET /posts
+ * GET /posts/:id
+ * POST /posts/
+ */
 
-Student.prototype.study = function study() {
-  return '${this.name} is studying'
-}
+const server = http.createServer((req, res) => {
+  console.log(req.url)
+  res.statusCode = 200
+  res.end('HELLO')
+})
 
-Object.setPrototypeOf(Student.prototype, Person.prototype)
+const PORT = 4000
 
-const me = new Student('neo')
-console.log(me.greet())
-console.log(me.study())
+server.listen(PORT, () => {
+  console.log(`The Server is listening at port: ${PORT}`)
+})
