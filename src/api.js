@@ -31,7 +31,7 @@ const posts = [
  * @typedef Route
  * @property {RegExp} url
  * @property {'GET' | 'POST'} method
- * @property {() => Promise<APIResponse>} callback
+ * @property {(matches: string[]) => Promise<APIResponse>} callback
  */
 
 /** @type {Route[]} */
@@ -41,16 +41,35 @@ const routes = [
     method: 'GET',
     callback: async () => ({
       statusCode: 200,
-      body: 'All posts',
+      body: posts,
     }),
   },
   {
     url: /^\/posts\/([a-zA-Z0-9-_])+$/, // TODO : Regex사용
     method: 'GET',
-    callback: async () => ({
-      statusCode: 200,
-      body: {},
-    }),
+    callback: async (matches) => {
+      const postId = matches[1]
+      if (!postId) {
+        return {
+          statusCode: 404,
+          body: 'Not found',
+        }
+      }
+
+      const post = posts.find((_post) => _post.id === postId)
+
+      if (!post) {
+        return {
+          statusCode: 404,
+          body: 'Not Found',
+        }
+      }
+
+      return {
+        statusCode: 200,
+        body: post,
+      }
+    },
   },
   {
     url: /^\/posts$/,

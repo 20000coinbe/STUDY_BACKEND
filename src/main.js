@@ -30,13 +30,21 @@ const server = http.createServer((req, res) => {
         _route.method === req.method
     )
 
-    if (!route) {
+    if (!req.url || !route) {
       res.statusCode = 404
       res.end('Not Found')
       return
     }
 
-    const result = await route.callback()
+    const regexResult = route.url.exec(req.url)
+
+    if (!regexResult) {
+      res.statusCode = 404
+      res.end('Not Found')
+      return
+    }
+
+    const result = await route.callback(regexResult)
     res.statusCode = result.statusCode
 
     if (typeof result.body === 'string') {
