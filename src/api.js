@@ -31,7 +31,7 @@ const posts = [
  * @typedef Route
  * @property {RegExp} url
  * @property {'GET' | 'POST'} method
- * @property {(matches: string[]) => Promise<APIResponse>} callback
+ * @property {(matches: string[], body: Object | undefined) => Promise<APIResponse>} callback
  */
 
 /** @type {Route[]} */
