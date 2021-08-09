@@ -8,6 +8,9 @@
     "debug": "node /src/main.js",
     "server": "nodemon src/main.js"
   },
+  "engines": {
+    "node": "13.5.0"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {

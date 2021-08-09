@@ -31,7 +31,7 @@ const posts = [
  * @typedef Route
  * @property {RegExp} url
  * @property {'GET' | 'POST'} method
- * @property {(matches: string[], body: Object | undefined) => Promise<APIResponse>} callback
+ * @property {(matches: string[], body: Object.<string, *> | undefined) => Promise<APIResponse>} callback
  */
 
 /** @type {Route[]} */
@@ -74,10 +74,28 @@ const routes = [
   {
     url: /^\/posts$/,
     method: 'POST',
-    callback: async () => ({
-      statusCode: 200,
-      body: {},
-    }),
+    callback: async (_, body) => {
+      if (!body) {
+        return {
+          statusCode: 400,
+          body: 'Ill-formed request',
+        }
+      }
+
+      /** @type {string} */
+      /* eslint-disable-next-line prefer-destructuring */
+      const title = body.title
+
+      posts.push({
+        id: title.replace(/\s/g, '_'),
+        title,
+        content: body.content,
+      })
+      return {
+        statusCode: 200,
+        body: 'TEST',
+      }
+    },
   },
 ]
 

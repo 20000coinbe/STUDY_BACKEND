@@ -47,10 +47,14 @@ const server = http.createServer((req, res) => {
     /** @type {string | undefined} */
     const reqBody =
       (req.headers['content-type'] === 'application/json' &&
-        (await new Promise((resolve) => {
+        (await new Promise((resolve, reject) => {
           req.setEncoding('utf-8')
           req.on('data', (data) => {
-            resolve(data)
+            try {
+              resolve(JSON.parse(data))
+            } catch {
+              reject(new Error('Ill-formed json'))
+            }
           })
         }))) ||
       undefined
