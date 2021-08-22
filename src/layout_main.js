@@ -44,7 +44,11 @@ const server = http.createServer((req, res) => {
       return
     }
 
+<<<<<<< HEAD
     /** @type {Object.<string, *> | undefined} */
+=======
+    /** @type {string | undefined} */
+>>>>>>> a8832fcd8383d1c51e93c81637e46a7f00480943
     const reqBody =
       (req.headers['content-type'] === 'application/json' &&
         (await new Promise((resolve, reject) => {
